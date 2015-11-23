@@ -234,8 +234,11 @@ class SbsCompareCommand( sublime_plugin.TextCommand ):
 			view1_syntax = syntax
 			view2_syntax = syntax
 			
-			# make new window
-			active_window.run_command( 'new_window' )		
+			# make new window or tab
+			if not self.settings().get( 'open_in_tab', False ):
+				active_window.run_command( 'new_tab' )
+			else:
+				active_window.run_command( 'new_window' )
 			new_window = sublime.active_window()
 			new_window.set_layout( { "cols": [0.0, 0.5, 1.0], "rows": [0.0, 1.0], "cells": [[0, 0, 1, 1], [1, 0, 2, 1]] } )
 			
